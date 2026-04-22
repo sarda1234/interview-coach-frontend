@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 
 const API = "https://interview-coach-backend-7r4u.onrender.com";
 const TOTAL_QUESTIONS = 15;
+
 
 export default function App() {
   const [page, setPage] = useState("landing");
@@ -86,10 +88,13 @@ export default function App() {
             <p>Final score and improvement plan</p>
           </div>
         </div>
-        <button className="btn-primary" onClick={() => setPage("role")}>
-          Start Mock Interview — $2.99
-        </button>
-        <p className="price-tag">One-time payment • 15 Questions • Any Role • Any Industry</p>
+        <button className="btn-primary" onClick={() => window.open("https://imojo.in/YOURLINK", "_blank")}>
+  Pay ₹299 & Start Interview →
+</button>
+<button style={{marginTop: "12px", background: "transparent", border: "1px solid white", color: "white", padding: "10px 24px", borderRadius: "8px", cursor: "pointer"}} onClick={() => setPage("role")}>
+  ✅ I have paid — Start Interview
+</button>
+<p className="price-tag">One-time payment • 15 Questions • Any Role • Any Industry</p>
       </div>
     );
   }
