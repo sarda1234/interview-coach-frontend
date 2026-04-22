@@ -223,4 +223,90 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justif
+  justifify-content: center;
+  background: #f3f4f6;
+}
+
+.role-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.role-card h2 {
+  font-size: 1.6rem;
+  color: #1e3a5f;
+  margin-bottom: 8px;
+}
+
+.role-card p {
+  color: #6b7280;
+  margin-bottom: 28px;
+}
+
+.role-card input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 16px;
+  transition: border 0.2s;
+}
+
+.role-card input:focus {
+  border-color: #2d6a9f;
+}
+
+.report-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.report-page h2 {
+  font-size: 1.8rem;
+  color: #1e3a5f;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.report-box {
+  background: white;
+  border-radius: 12px;
+  padding: 36px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  white-space: pre-wrap;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.btn-restart {
+  background: #1e3a5f;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.btn-restart:hover {
+  background: #2d6a9f;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
