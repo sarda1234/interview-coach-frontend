@@ -88,7 +88,7 @@ export default function App() {
             <p>Final score and improvement plan</p>
           </div>
         </div>
-        <button className="btn-primary" onClick={() => window.open("https://imojo.in/qWacwM", "_blank")}>
+        <button className="btn-primary" onClick={() => window.open("https://www.instamojo.com/@ashwinsarda/la50b37ad490f4831be7a6d78ea2b122a/", "_blank")}>
   Pay ₹299 & Start Interview →
 </button>
 <button style={{marginTop: "12px", background: "transparent", border: "1px solid white", color: "white", padding: "10px 24px", borderRadius: "8px", cursor: "pointer"}} onClick={() => setPage("role")}>
