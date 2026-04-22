@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 const API = "https://interview-coach-backend-7r4u.onrender.com";
-const TOTAL_QUESTIONS = 4;
+const TOTAL_QUESTIONS = 15;
 
 export default function App() {
   const [page, setPage] = useState("landing");
@@ -87,9 +87,9 @@ export default function App() {
           </div>
         </div>
         <button className="btn-primary" onClick={() => setPage("role")}>
-          Start Mock Interview — $9.99
+          Start Mock Interview — $2.99
         </button>
-        <p className="price-tag">One-time payment • Unlimited sessions</p>
+        <p className="price-tag">One-time payment • 15 Questions • Any Role • Any Industry</p>
       </div>
     );
   }
