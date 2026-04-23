@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
@@ -22,6 +23,12 @@ export default function App() {
   const [questionNum, setQuestionNum] = useState(0);
   const [loading, setLoading] = useState(false);
   const [tokenError, setTokenError] = useState(false);
+  useEffect(() => {
+    const token = getTokenFromURL();
+    if (token) {
+      checkToken();
+    }
+  }, []);
 
   async function checkToken() {
     const token = getTokenFromURL();
