@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
@@ -6,6 +5,10 @@ import "./App.css";
 const API = "https://interview-coach-backend-7r4u.onrender.com";
 const TOTAL_QUESTIONS = 15;
 
+function getTokenFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("token");
+}
 
 export default function App() {
   const [page, setPage] = useState("landing");
@@ -18,6 +21,25 @@ export default function App() {
   const [report, setReport] = useState("");
   const [questionNum, setQuestionNum] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [tokenError, setTokenError] = useState(false);
+
+  async function checkToken() {
+    const token = getTokenFromURL();
+    if (!token) {
+      setTokenError(true);
+      return;
+    }
+    try {
+      const res = await axios.post(`${API}/api/verify-token`, { token });
+      if (res.data.valid) {
+        setPage("role");
+      } else {
+        setTokenError(true);
+      }
+    } catch {
+      setTokenError(true);
+    }
+  }
 
   async function startInterview() {
     setLoading(true);
@@ -69,7 +91,21 @@ export default function App() {
     setTranscript("");
     setReport("");
     setQuestionNum(0);
-  }if (page === "landing") {
+  }
+
+  if (tokenError) {
+    return (
+      <div className="landing">
+        <h1>❌ Invalid Access</h1>
+        <p>This link is invalid or has already been used. Please purchase a new session.</p>
+        <button className="btn-primary" onClick={() => window.open("https://superprofile.bio/vp/interview-coach", "_blank")}>
+          Buy a Session →
+        </button>
+      </div>
+    );
+  }
+
+  if (page === "landing") {
     return (
       <div className="landing">
         <h1>🎯 AI Interview Coach</h1>
@@ -89,10 +125,9 @@ export default function App() {
           </div>
         </div>
         <button className="btn-primary" onClick={() => window.open("https://superprofile.bio/vp/interview-coach", "_blank")}>
-  Pay ₹299 & Start Interview →
-</button>
-
-<p className="price-tag">One-time payment • 15 Questions • Any Role • Any Industry</p>
+          Pay ₹299 & Start Interview →
+        </button>
+        <p className="price-tag">One-time payment • 15 Questions • Any Role • Any Industry</p>
       </div>
     );
   }
