@@ -91,9 +91,7 @@ export default function App() {
         <button className="btn-primary" onClick={() => window.open("https://superprofile.bio/vp/interview-coach", "_blank")}>
   Pay ₹299 & Start Interview →
 </button>
-<button style={{marginTop: "12px", background: "transparent", border: "1px solid white", color: "white", padding: "10px 24px", borderRadius: "8px", cursor: "pointer"}} onClick={() => setPage("role")}>
-  ✅ I have paid — Start Interview
-</button>
+
 <p className="price-tag">One-time payment • 15 Questions • Any Role • Any Industry</p>
       </div>
     );
