@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
@@ -23,6 +22,7 @@ export default function App() {
   const [questionNum, setQuestionNum] = useState(0);
   const [loading, setLoading] = useState(false);
   const [tokenError, setTokenError] = useState(false);
+
   useEffect(() => {
     const token = getTokenFromURL();
     if (token) {
@@ -50,12 +50,20 @@ export default function App() {
 
   async function startInterview() {
     setLoading(true);
-    const res = await axios.post(`${API}/api/interview`, { role, messages: [] });
-    const firstQuestion = res.data.reply;
-    setQuestion(firstQuestion);
-    setMessages([{ role: "assistant", content: firstQuestion }]);
-    setQuestionNum(1);
-    setPage("interview");
+    try {
+      // Consume token when interview actually begins
+      const token = getTokenFromURL();
+      await axios.post(`${API}/api/use-token`, { token });
+
+      const res = await axios.post(`${API}/api/interview`, { role, messages: [] });
+      const firstQuestion = res.data.reply;
+      setQuestion(firstQuestion);
+      setMessages([{ role: "assistant", content: firstQuestion }]);
+      setQuestionNum(1);
+      setPage("interview");
+    } catch (err) {
+      console.error(err);
+    }
     setLoading(false);
   }
 
