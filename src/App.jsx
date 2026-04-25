@@ -51,17 +51,21 @@ export default function App() {
   async function startInterview() {
     setLoading(true);
     try {
-      // Consume token when interview actually begins
+      // Consume the token when interview starts
       const token = getTokenFromURL();
       await axios.post(`${API}/api/use-token`, { token });
 
-      const res = await axios.post(`${API}/api/interview`, { role, messages: [] });
+      const res = await axios.post(`${API}/api/interview`, {
+        role,
+        messages: [{ role: "user", content: "Start the interview" }],
+      });
       const firstQuestion = res.data.reply;
       setQuestion(firstQuestion);
       setMessages([{ role: "assistant", content: firstQuestion }]);
       setQuestionNum(1);
       setPage("interview");
     } catch (err) {
+      alert("Something went wrong. Please try again.");
       console.error(err);
     }
     setLoading(false);
@@ -69,9 +73,14 @@ export default function App() {
 
   async function submitAnswer() {
     setLoading(true);
-    const res = await axios.post(`${API}/api/feedback`, { question, answer });
-    setFeedback(res.data.feedback);
-    setTranscript((prev) => prev + `Q${questionNum}: ${question}\nAnswer: ${answer}\n\n`);
+    try {
+      const res = await axios.post(`${API}/api/feedback`, { question, answer });
+      setFeedback(res.data.feedback);
+      setTranscript((prev) => prev + `Q${questionNum}: ${question}\nAnswer: ${answer}\n\n`);
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+      console.error(err);
+    }
     setLoading(false);
   }
 
@@ -79,20 +88,30 @@ export default function App() {
     if (questionNum >= TOTAL_QUESTIONS) {
       setPage("report");
       setLoading(true);
-      const res = await axios.post(`${API}/api/report`, { role, transcript });
-      setReport(res.data.report);
+      try {
+        const res = await axios.post(`${API}/api/report`, { role, transcript });
+        setReport(res.data.report);
+      } catch (err) {
+        alert("Something went wrong generating your report.");
+        console.error(err);
+      }
       setLoading(false);
       return;
     }
     setLoading(true);
-    const updatedMessages = [...messages, { role: "user", content: answer }];
-    const res = await axios.post(`${API}/api/interview`, { role, messages: updatedMessages });
-    const nextQ = res.data.reply;
-    setMessages([...updatedMessages, { role: "assistant", content: nextQ }]);
-    setQuestion(nextQ);
-    setAnswer("");
-    setFeedback("");
-    setQuestionNum((n) => n + 1);
+    try {
+      const updatedMessages = [...messages, { role: "user", content: answer }];
+      const res = await axios.post(`${API}/api/interview`, { role, messages: updatedMessages });
+      const nextQ = res.data.reply;
+      setMessages([...updatedMessages, { role: "assistant", content: nextQ }]);
+      setQuestion(nextQ);
+      setAnswer("");
+      setFeedback("");
+      setQuestionNum((n) => n + 1);
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+      console.error(err);
+    }
     setLoading(false);
   }
 
