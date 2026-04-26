@@ -129,6 +129,11 @@ export default function App() {
     } catch { setTokenError(true); }
   }
 
+  function handleBuyClick() {
+    fetch(`${API}/api/track-click`, { method: "POST" }).catch(() => {});
+    window.open("https://superprofile.bio/vp/interview-coach", "_blank");
+  }
+
   async function startInterview() {
     setLoading(true);
     try {
@@ -198,9 +203,7 @@ export default function App() {
         <div className="error-page">
           <h1>Invalid Access Link</h1>
           <p>This link is invalid or has already been used. Please purchase a new session to continue.</p>
-          <button className="btn-cta" onClick={() => window.open("https://superprofile.bio/vp/interview-coach", "_blank")}>
-            Buy a Session
-          </button>
+          <button className="btn-cta" onClick={handleBuyClick}>Buy a Session</button>
         </div>
       )}
 
@@ -214,7 +217,7 @@ export default function App() {
             <h1>Ace Your Next<br /><span>Job Interview</span></h1>
             <p>Practice with an AI interviewer that asks real questions, judges your answers, and tells you exactly what to improve.</p>
             <div className="cta-group">
-              <button className="btn-cta" onClick={() => window.open("https://superprofile.bio/vp/interview-coach", "_blank")}>
+              <button className="btn-cta" onClick={handleBuyClick}>
                 Start Interview Prep - Rs.299
               </button>
               <div className="cta-sub">
@@ -305,9 +308,7 @@ export default function App() {
             <p>Join hundreds of professionals who practiced smarter and landed their dream jobs.</p>
             <div className="price-tag">Rs.299</div>
             <div className="price-original">Usually Rs.999</div>
-            <button className="btn-cta" onClick={() => window.open("https://superprofile.bio/vp/interview-coach", "_blank")}>
-              Get Instant Access
-            </button>
+            <button className="btn-cta" onClick={handleBuyClick}>Get Instant Access</button>
             <div className="guarantee">Secure payment via Superprofile - Instant email delivery</div>
           </div>
         </div>
@@ -401,4 +402,4 @@ export default function App() {
       )}
     </>
   );
-} 
+}
