@@ -41,6 +41,64 @@ const styles = `
   .feature-icon { width: 40px; height: 40px; background: rgba(245,158,11,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 14px; }
   .feature-card h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; color: #f0ede8; margin-bottom: 6px; }
   .feature-card p { font-size: 13px; color: #6b6864; line-height: 1.5; }
+
+  /* ── PRODUCT PREVIEW SECTION ── */
+  .preview-section { max-width: 780px; margin: 0 auto; padding: 0 24px 0; }
+  .preview-tabs { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+  .preview-tab { padding: 8px 18px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: #6b6864; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .preview-tab.active { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); color: #f59e0b; }
+  .preview-tab:hover:not(.active) { border-color: rgba(255,255,255,0.2); color: #9a9690; }
+  .preview-window { background: #111110; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+  .preview-topbar { background: #1a1918; padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .preview-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .pd-red { background: #ff5f57; }
+  .pd-yellow { background: #febc2e; }
+  .pd-green { background: #28c840; }
+  .preview-url { margin-left: 8px; background: rgba(255,255,255,0.05); border-radius: 6px; padding: 4px 12px; font-size: 11px; color: #4a4846; font-family: monospace; }
+  .preview-body { padding: 24px; }
+
+  /* Question preview */
+  .pv-question-block { margin-bottom: 20px; }
+  .pv-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #f59e0b; font-weight: 600; margin-bottom: 8px; }
+  .pv-question-text { font-size: 15px; color: #f0ede8; line-height: 1.6; background: rgba(245,158,11,0.05); border-left: 3px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 14px 16px; }
+  .pv-answer-block { margin-bottom: 20px; }
+  .pv-answer-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #5a5754; font-weight: 600; margin-bottom: 8px; }
+  .pv-answer-text { font-size: 13px; color: #9a9690; line-height: 1.6; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 14px 16px; }
+  .pv-progress { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .pv-progress-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+  .pv-progress-fill { height: 100%; background: #f59e0b; border-radius: 2px; }
+  .pv-progress-text { font-size: 11px; color: #5a5754; white-space: nowrap; }
+
+  /* Feedback preview */
+  .pv-feedback-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+  .pv-feedback-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .pv-score-badge { background: rgba(34,197,94,0.15); color: #22c55e; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(34,197,94,0.25); }
+  .pv-score-badge.mid { background: rgba(245,158,11,0.15); color: #f59e0b; border-color: rgba(245,158,11,0.25); }
+  .pv-feedback-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #22c55e; font-weight: 600; }
+  .pv-feedback-title.mid { color: #f59e0b; }
+  .pv-feedback-text { font-size: 13px; color: #9a9690; line-height: 1.65; }
+  .pv-tip-block { background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.12); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .pv-tip-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #f59e0b; font-weight: 600; margin-bottom: 6px; }
+  .pv-tip-text { font-size: 13px; color: #c9b47a; line-height: 1.6; }
+
+  /* Report preview */
+  .pv-report-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+  .pv-report-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #f0ede8; }
+  .pv-report-role { font-size: 12px; color: #5a5754; margin-top: 2px; }
+  .pv-overall-score { text-align: right; }
+  .pv-score-number { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: #f59e0b; line-height: 1; }
+  .pv-score-label { font-size: 11px; color: #5a5754; margin-top: 2px; }
+  .pv-score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .pv-score-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px; }
+  .pv-score-item-label { font-size: 11px; color: #5a5754; margin-bottom: 6px; }
+  .pv-score-item-bar { height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+  .pv-score-item-fill { height: 100%; border-radius: 2px; }
+  .pv-score-item-num { font-size: 12px; font-weight: 600; }
+  .pv-plan-block { background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.1); border-radius: 10px; padding: 14px 16px; }
+  .pv-plan-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #f59e0b; font-weight: 600; margin-bottom: 10px; }
+  .pv-plan-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 13px; color: #9a9690; line-height: 1.5; }
+  .pv-plan-num { color: #f59e0b; font-weight: 600; flex-shrink: 0; }
+
   .testimonials { max-width: 720px; margin: 60px auto 0; padding: 0 24px; }
   .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .testimonial-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 20px; }
@@ -99,6 +157,190 @@ const styles = `
 function getTokenFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("token");
+}
+
+function ProductPreview() {
+  const [activeTab, setActiveTab] = useState("question");
+
+  return (
+    <div className="preview-section">
+      <div className="features-label" style={{ textAlign: "center", marginBottom: "16px" }}>
+        See exactly what you get
+      </div>
+      <p style={{ textAlign: "center", fontSize: "14px", color: "#5a5754", marginBottom: "28px" }}>
+        Real screenshots from inside the app
+      </p>
+      <div className="preview-tabs">
+        <button
+          className={`preview-tab ${activeTab === "question" ? "active" : ""}`}
+          onClick={() => setActiveTab("question")}
+        >
+          💬 Live Interview
+        </button>
+        <button
+          className={`preview-tab ${activeTab === "feedback" ? "active" : ""}`}
+          onClick={() => setActiveTab("feedback")}
+        >
+          ⚡ Instant Feedback
+        </button>
+        <button
+          className={`preview-tab ${activeTab === "report" ? "active" : ""}`}
+          onClick={() => setActiveTab("report")}
+        >
+          📊 Final Report
+        </button>
+      </div>
+
+      <div className="preview-window">
+        <div className="preview-topbar">
+          <div className="preview-dot pd-red" />
+          <div className="preview-dot pd-yellow" />
+          <div className="preview-dot pd-green" />
+          <div className="preview-url">interview-coach-frontend-nu.vercel.app</div>
+        </div>
+        <div className="preview-body">
+
+          {activeTab === "question" && (
+            <>
+              <div style={{ marginBottom: "16px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                  <span style={{ fontFamily: "Syne, sans-serif", fontSize: "14px", fontWeight: 700, color: "#f0ede8" }}>Mock Interview — Software Engineer</span>
+                  <span style={{ fontSize: "12px", color: "#5a5754" }}>Question 4 of 15</span>
+                </div>
+                <div className="pv-progress">
+                  <div className="pv-progress-bar">
+                    <div className="pv-progress-fill" style={{ width: "26%" }} />
+                  </div>
+                  <span className="pv-progress-text">26% complete</span>
+                </div>
+              </div>
+
+              <div className="pv-question-block">
+                <div className="pv-label">Interviewer</div>
+                <div className="pv-question-text">
+                  You're given a system that currently handles 1,000 requests/second and needs to scale to 100,000. Walk me through your approach — what bottlenecks would you look for and how would you address them?
+                </div>
+              </div>
+
+              <div className="pv-answer-block">
+                <div className="pv-answer-label">Your Answer</div>
+                <div className="pv-answer-text">
+                  I'd start by profiling to identify the actual bottleneck — usually it's either the database, the application tier, or the network. For the DB, I'd look at query optimization and read replicas first. Then I'd consider horizontal scaling of the app tier with a load balancer...
+                </div>
+              </div>
+
+              <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
+                <div style={{ flex: 1, background: "#f59e0b", borderRadius: "100px", padding: "10px", textAlign: "center", fontSize: "13px", fontWeight: 700, color: "#0a0a0a", fontFamily: "Syne, sans-serif" }}>
+                  Submit Answer
+                </div>
+              </div>
+            </>
+          )}
+
+          {activeTab === "feedback" && (
+            <>
+              <div className="pv-question-block" style={{ marginBottom: "16px" }}>
+                <div className="pv-label">Question Asked</div>
+                <div className="pv-question-text" style={{ fontSize: "13px" }}>
+                  Tell me about a time you handled a conflict with a teammate. What was the outcome?
+                </div>
+              </div>
+
+              <div className="pv-feedback-block">
+                <div className="pv-feedback-header">
+                  <div className="pv-score-badge">Score: 8/10</div>
+                  <div className="pv-feedback-title">✓ What worked well</div>
+                </div>
+                <div className="pv-feedback-text">
+                  Strong use of the STAR format — you clearly described the situation, your role, and the resolution. Your answer showed maturity and ownership. Mentioning the specific outcome ("we shipped on time and the relationship improved") made it concrete and credible.
+                </div>
+              </div>
+
+              <div className="pv-feedback-block" style={{ borderColor: "rgba(245,158,11,0.15)" }}>
+                <div className="pv-feedback-header">
+                  <div className="pv-score-badge mid">Needs work</div>
+                  <div className="pv-feedback-title mid">△ What to improve</div>
+                </div>
+                <div className="pv-feedback-text">
+                  You spent too long on the backstory (3–4 sentences) before getting to your actions. Interviewers want to hear what YOU did, not the full history. Trim setup to 1 sentence, spend 70% of your answer on your actions and the result.
+                </div>
+              </div>
+
+              <div className="pv-tip-block">
+                <div className="pv-tip-label">💡 Pro Tip for Next Time</div>
+                <div className="pv-tip-text">
+                  End with a "what I learned" line — e.g. "This taught me to raise concerns earlier rather than letting tension build." It signals self-awareness and makes you memorable.
+                </div>
+              </div>
+            </>
+          )}
+
+          {activeTab === "report" && (
+            <>
+              <div className="pv-report-header">
+                <div>
+                  <div className="pv-report-title">Final Performance Report</div>
+                  <div className="pv-report-role">Role: Product Manager · 15 questions completed</div>
+                </div>
+                <div className="pv-overall-score">
+                  <div className="pv-score-number">74</div>
+                  <div className="pv-score-label">Overall Score</div>
+                </div>
+              </div>
+
+              <div className="pv-score-grid">
+                <div className="pv-score-item">
+                  <div className="pv-score-item-label">Communication</div>
+                  <div className="pv-score-item-bar">
+                    <div className="pv-score-item-fill" style={{ width: "82%", background: "#22c55e" }} />
+                  </div>
+                  <div className="pv-score-item-num" style={{ color: "#22c55e" }}>82/100</div>
+                </div>
+                <div className="pv-score-item">
+                  <div className="pv-score-item-label">Technical Depth</div>
+                  <div className="pv-score-item-bar">
+                    <div className="pv-score-item-fill" style={{ width: "65%", background: "#f59e0b" }} />
+                  </div>
+                  <div className="pv-score-item-num" style={{ color: "#f59e0b" }}>65/100</div>
+                </div>
+                <div className="pv-score-item">
+                  <div className="pv-score-item-label">Structured Thinking</div>
+                  <div className="pv-score-item-bar">
+                    <div className="pv-score-item-fill" style={{ width: "78%", background: "#22c55e" }} />
+                  </div>
+                  <div className="pv-score-item-num" style={{ color: "#22c55e" }}>78/100</div>
+                </div>
+                <div className="pv-score-item">
+                  <div className="pv-score-item-label">Confidence & Clarity</div>
+                  <div className="pv-score-item-bar">
+                    <div className="pv-score-item-fill" style={{ width: "70%", background: "#f59e0b" }} />
+                  </div>
+                  <div className="pv-score-item-num" style={{ color: "#f59e0b" }}>70/100</div>
+                </div>
+              </div>
+
+              <div className="pv-plan-block">
+                <div className="pv-plan-label">📅 Your 1-Week Improvement Plan</div>
+                <div className="pv-plan-item">
+                  <span className="pv-plan-num">1.</span>
+                  <span>Practice concise problem framing — your answers run 20% longer than needed. Use the "headline first" technique: state your conclusion, then explain.</span>
+                </div>
+                <div className="pv-plan-item">
+                  <span className="pv-plan-num">2.</span>
+                  <span>Study metrics-driven answers. 6 of your 15 answers lacked specific numbers. Prepare 3–4 data points from past experience you can drop naturally.</span>
+                </div>
+                <div className="pv-plan-item">
+                  <span className="pv-plan-num">3.</span>
+                  <span>For behavioural questions, cut setup to 1 sentence. You're strong on outcomes but spend too long on context before getting to your actions.</span>
+                </div>
+              </div>
+            </>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function App() {
@@ -261,6 +503,10 @@ export default function App() {
               </div>
             </div>
           </div>
+
+          {/* ── PRODUCT PREVIEW ── */}
+          <div className="divider" />
+          <ProductPreview />
 
           <div className="testimonials">
             <div className="features-label" style={{textAlign:"center", marginBottom:"36px", marginTop:"60px"}}>What people are saying</div>
