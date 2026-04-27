@@ -181,6 +181,22 @@ const styles = `
   .upsell-price-orig { font-size: 16px; color: #3a3836; text-decoration: line-through; margin-left: 8px; }
   .upsell-guarantee { font-size: 12px; color: #3a3836; margin-top: 12px; }
   .free-banner { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15); border-radius: 10px; padding: 10px 16px; font-size: 13px; color: #22c55e; margin-bottom: 20px; }
+  /* ── WHATSAPP SECTION ── */
+  .whatsapp-section { max-width: 720px; margin: 48px auto 0; padding: 0 24px; }
+  .whatsapp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .wa-card { background: #111b21; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); }
+  .wa-header { background: #1f2c34; padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+  .wa-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: Syne,sans-serif; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .wa-name { font-size: 13px; font-weight: 600; color: #e9edef; }
+  .wa-role { font-size: 11px; color: #8696a0; }
+  .wa-status { font-size: 10px; color: #00a884; margin-top: 1px; }
+  .wa-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .wa-msg { max-width: 85%; padding: 7px 10px 18px; border-radius: 8px; font-size: 12px; line-height: 1.5; position: relative; }
+  .wa-msg-in { background: #1f2c34; color: #e9edef; border-radius: 0 8px 8px 8px; align-self: flex-start; }
+  .wa-msg-out { background: #005c4b; color: #e9edef; border-radius: 8px 0 8px 8px; align-self: flex-end; }
+  .wa-time { font-size: 9px; color: #8696a0; position: absolute; bottom: 4px; right: 8px; }
+  .wa-tick { color: #53bdeb; }
+  .wa-label { text-align: center; font-size: 11px; color: #3a3836; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
 `;
 
 function getTokenFromURL() {
@@ -409,6 +425,7 @@ export default function App() {
   }
 
   function handleFreeClick() {
+    fetch(`${API}/api/track-free-trial`, { method: "POST" }).catch(() => {});
     setIsFree(true);
     setPage("role");
   }
@@ -540,6 +557,49 @@ export default function App() {
             </div>
           </div>
 
+
+          {/* ── WHATSAPP TESTIMONIALS ── */}
+          <div className="whatsapp-section">
+            <div className="wa-label">what people are saying 💬</div>
+            <div className="whatsapp-grid">
+              <div className="wa-card">
+                <div className="wa-header">
+                  <div className="wa-avatar" style={{background:"#1e3a5f",color:"#93c5fd"}}>RK</div>
+                  <div><div className="wa-name">Rohit K.</div><div className="wa-role">Software Engineer</div><div className="wa-status">● online</div></div>
+                </div>
+                <div className="wa-body">
+                  <div className="wa-msg wa-msg-in">Bhai tried this AI interview thing before my Flipkart round<div className="wa-time">9:42 AM</div></div>
+                  <div className="wa-msg wa-msg-out">How was it?<div className="wa-time">9:43 AM</div></div>
+                  <div className="wa-msg wa-msg-in">System design questions exactly like the real interview. Feedback was brutal but accurate 😅<div className="wa-time">9:44 AM</div></div>
+                  <div className="wa-msg wa-msg-in">Got the offer btw 🎉 Rs.299 was nothing<div className="wa-time">9:45 AM</div></div>
+                </div>
+              </div>
+              <div className="wa-card">
+                <div className="wa-header">
+                  <div className="wa-avatar" style={{background:"#1f3b2e",color:"#6ee7b7"}}>PS</div>
+                  <div><div className="wa-name">Priya S.</div><div className="wa-role">MBA — HR Interview</div><div className="wa-status">● online</div></div>
+                </div>
+                <div className="wa-body">
+                  <div className="wa-msg wa-msg-in">Have you used that AI interview prep tool?<div className="wa-time">11:15 AM</div></div>
+                  <div className="wa-msg wa-msg-out">No what is it<div className="wa-time">11:16 AM</div></div>
+                  <div className="wa-msg wa-msg-in">Gives feedback on every answer. Said I talk too much in intros 😭<div className="wa-time">11:17 AM</div></div>
+                  <div className="wa-msg wa-msg-in">Cleared my final round today!! Sending you the link rn 🙏<div className="wa-time">11:19 AM</div></div>
+                </div>
+              </div>
+              <div className="wa-card">
+                <div className="wa-header">
+                  <div className="wa-avatar" style={{background:"#3b2a1f",color:"#fcd34d"}}>AM</div>
+                  <div><div className="wa-name">Arjun M.</div><div className="wa-role">Product Manager</div><div className="wa-status">● online</div></div>
+                </div>
+                <div className="wa-body">
+                  <div className="wa-msg wa-msg-in">Was so nervous for my PM interview at Swiggy<div className="wa-time">8:30 PM</div></div>
+                  <div className="wa-msg wa-msg-out">Did you prepare properly?<div className="wa-time">8:31 PM</div></div>
+                  <div className="wa-msg wa-msg-in">Used this Rs.299 AI coach. Full report with score and improvement plan at the end<div className="wa-time">8:32 PM</div></div>
+                  <div className="wa-msg wa-msg-in">Score went from 61 to 78 in 2 days. Interviewer said I was very well prepared 🙏<div className="wa-time">8:33 PM</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="divider" />
 
           <div className="features">
