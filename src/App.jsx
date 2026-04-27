@@ -99,6 +99,21 @@ const styles = `
   .pv-plan-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 13px; color: #9a9690; line-height: 1.5; }
   .pv-plan-num { color: #f59e0b; font-weight: 600; flex-shrink: 0; }
 
+  /* ── SCORE STRIP ── */
+  .score-strip { max-width: 720px; margin: 48px auto 0; padding: 0 24px; }
+  .score-strip-inner { background: linear-gradient(135deg, #f59e0b 0%, #ff6b35 100%); border-radius: 20px; padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  .score-strip-left h3 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .score-strip-left p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.5; max-width: 320px; }
+  .score-strip-right { text-align: center; flex-shrink: 0; }
+  .score-strip-number { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; color: #fff; line-height: 1; }
+  .score-strip-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .score-strip-bars { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+  .score-strip-bar-row { display: flex; align-items: center; gap: 10px; }
+  .score-strip-bar-label { font-size: 12px; color: rgba(255,255,255,0.8); width: 130px; flex-shrink: 0; }
+  .score-strip-bar-track { flex: 1; height: 4px; background: rgba(255,255,255,0.25); border-radius: 2px; overflow: hidden; }
+  .score-strip-bar-fill { height: 100%; background: #fff; border-radius: 2px; }
+  .score-strip-bar-num { font-size: 12px; color: #fff; font-weight: 600; width: 36px; text-align: right; flex-shrink: 0; }
+
   .testimonials { max-width: 720px; margin: 60px auto 0; padding: 0 24px; }
   .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .testimonial-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 20px; }
@@ -152,6 +167,20 @@ const styles = `
   .error-page { min-height: 100vh; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; }
   .error-page h1 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; color: #f0ede8; margin-bottom: 12px; }
   .error-page p { font-size: 15px; color: #6b6864; margin-bottom: 28px; max-width: 400px; }
+  .upsell-page { min-height: 100vh; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; }
+  .upsell-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 24px; padding: 48px 32px; max-width: 480px; width: 100%; }
+  .upsell-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #22c55e; font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+  .upsell-card h2 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #f0ede8; margin-bottom: 12px; line-height: 1.2; }
+  .upsell-card h2 span { color: #f59e0b; }
+  .upsell-card p { font-size: 15px; color: #6b6864; line-height: 1.6; margin-bottom: 28px; }
+  .upsell-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; text-align: left; }
+  .upsell-feature { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #9a9690; }
+  .upsell-feature-icon { width: 28px; height: 28px; background: rgba(245,158,11,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .upsell-price { margin-bottom: 20px; }
+  .upsell-price-num { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: #f59e0b; }
+  .upsell-price-orig { font-size: 16px; color: #3a3836; text-decoration: line-through; margin-left: 8px; }
+  .upsell-guarantee { font-size: 12px; color: #3a3836; margin-top: 12px; }
+  .free-banner { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15); border-radius: 10px; padding: 10px 16px; font-size: 13px; color: #22c55e; margin-bottom: 20px; }
 `;
 
 function getTokenFromURL() {
@@ -343,6 +372,8 @@ function ProductPreview() {
   );
 }
 
+const FREE_QUESTIONS = 3;
+
 export default function App() {
   const [page, setPage] = useState("landing");
   const [role, setRole] = useState("");
@@ -355,6 +386,7 @@ export default function App() {
   const [questionNum, setQuestionNum] = useState(0);
   const [loading, setLoading] = useState(false);
   const [tokenError, setTokenError] = useState(false);
+  const [isFree, setIsFree] = useState(false);
 
   useEffect(() => {
     const token = getTokenFromURL();
@@ -376,20 +408,37 @@ export default function App() {
     window.open("https://superprofile.bio/vp/interview-coach", "_blank");
   }
 
+  function handleFreeClick() {
+    setIsFree(true);
+    setPage("role");
+  }
+
   async function startInterview() {
     setLoading(true);
     try {
-      const token = getTokenFromURL();
-      await axios.post(`${API}/api/use-token`, { token });
-      const res = await axios.post(`${API}/api/interview`, {
-        role,
-        messages: [{ role: "user", content: "Start the interview" }],
-      });
-      const firstQuestion = res.data.reply;
-      setQuestion(firstQuestion);
-      setMessages([{ role: "assistant", content: firstQuestion }]);
-      setQuestionNum(1);
-      setPage("interview");
+      if (isFree) {
+        const res = await axios.post(`${API}/api/free-interview`, {
+          role,
+          messages: [{ role: "user", content: "Start the interview" }],
+        });
+        const firstQuestion = res.data.reply;
+        setQuestion(firstQuestion);
+        setMessages([{ role: "assistant", content: firstQuestion }]);
+        setQuestionNum(1);
+        setPage("interview");
+      } else {
+        const token = getTokenFromURL();
+        await axios.post(`${API}/api/use-token`, { token });
+        const res = await axios.post(`${API}/api/interview`, {
+          role,
+          messages: [{ role: "user", content: "Start the interview" }],
+        });
+        const firstQuestion = res.data.reply;
+        setQuestion(firstQuestion);
+        setMessages([{ role: "assistant", content: firstQuestion }]);
+        setQuestionNum(1);
+        setPage("interview");
+      }
     } catch (err) {
       alert("Something went wrong. Please try again.");
     }
@@ -407,7 +456,12 @@ export default function App() {
   }
 
   async function nextQuestion() {
-    if (questionNum >= TOTAL_QUESTIONS) {
+    // Free trial limit reached
+    if (isFree && questionNum >= FREE_QUESTIONS) {
+      setPage("upsell");
+      return;
+    }
+    if (!isFree && questionNum >= TOTAL_QUESTIONS) {
       setPage("report");
       setLoading(true);
       try {
@@ -420,7 +474,8 @@ export default function App() {
     setLoading(true);
     try {
       const updatedMessages = [...messages, { role: "user", content: answer }];
-      const res = await axios.post(`${API}/api/interview`, { role, messages: updatedMessages });
+      const endpoint = isFree ? `${API}/api/free-interview` : `${API}/api/interview`;
+      const res = await axios.post(endpoint, { role, messages: updatedMessages });
       const nextQ = res.data.reply;
       setMessages([...updatedMessages, { role: "assistant", content: nextQ }]);
       setQuestion(nextQ);
@@ -435,6 +490,7 @@ export default function App() {
     setPage("landing"); setRole(""); setMessages([]);
     setQuestion(""); setAnswer(""); setFeedback("");
     setTranscript(""); setReport(""); setQuestionNum(0);
+    setIsFree(false);
   }
 
   return (
@@ -454,19 +510,22 @@ export default function App() {
           <div className="hero">
             <div className="badge">
               <div className="badge-dot" />
-              Limited offer - Rs.299 only
+              Try free — no sign up needed
             </div>
             <h1>Ace Your Next<br /><span>Job Interview</span></h1>
             <p>Practice with an AI interviewer that asks real questions, judges your answers, and tells you exactly what to improve.</p>
             <div className="cta-group">
-              <button className="btn-cta" onClick={handleBuyClick}>
-                Start Interview Prep - Rs.299
+              <button className="btn-cta" onClick={handleFreeClick}>
+                🎯 Try Free — 3 Questions, No Sign Up
               </button>
               <div className="cta-sub">
-                <span>Instant access</span>
+                <span>No payment needed</span>
                 <span>Any role</span>
-                <span>One-time payment</span>
+                <span>Instant start</span>
               </div>
+              <button style={{background:"transparent", border:"1px solid rgba(245,158,11,0.3)", color:"#f59e0b", fontFamily:"'DM Sans', sans-serif", fontSize:"14px", padding:"10px 24px", borderRadius:"100px", cursor:"pointer", marginTop:"4px"}} onClick={handleBuyClick}>
+                Already convinced? Full access — Rs.299 →
+              </button>
             </div>
             <div className="social-proof">
               <div className="avatars">
@@ -507,6 +566,42 @@ export default function App() {
           {/* ── PRODUCT PREVIEW ── */}
           <div className="divider" />
           <ProductPreview />
+
+          {/* ── SCORE STRIP ── */}
+          <div className="score-strip">
+            <div className="score-strip-inner">
+              <div className="score-strip-left">
+                <h3>See exactly how you score</h3>
+                <p>After your 15-question session, get a detailed breakdown across 4 key dimensions with a personalised improvement plan.</p>
+                <div className="score-strip-bars">
+                  <div className="score-strip-bar-row">
+                    <span className="score-strip-bar-label">Communication</span>
+                    <div className="score-strip-bar-track"><div className="score-strip-bar-fill" style={{width:"82%"}} /></div>
+                    <span className="score-strip-bar-num">82</span>
+                  </div>
+                  <div className="score-strip-bar-row">
+                    <span className="score-strip-bar-label">Technical Depth</span>
+                    <div className="score-strip-bar-track"><div className="score-strip-bar-fill" style={{width:"65%"}} /></div>
+                    <span className="score-strip-bar-num">65</span>
+                  </div>
+                  <div className="score-strip-bar-row">
+                    <span className="score-strip-bar-label">Structured Thinking</span>
+                    <div className="score-strip-bar-track"><div className="score-strip-bar-fill" style={{width:"78%"}} /></div>
+                    <span className="score-strip-bar-num">78</span>
+                  </div>
+                  <div className="score-strip-bar-row">
+                    <span className="score-strip-bar-label">Confidence & Clarity</span>
+                    <div className="score-strip-bar-track"><div className="score-strip-bar-fill" style={{width:"70%"}} /></div>
+                    <span className="score-strip-bar-num">70</span>
+                  </div>
+                </div>
+              </div>
+              <div className="score-strip-right">
+                <div className="score-strip-number">74</div>
+                <div className="score-strip-label">Overall Score</div>
+              </div>
+            </div>
+          </div>
 
           <div className="testimonials">
             <div className="features-label" style={{textAlign:"center", marginBottom:"36px", marginTop:"60px"}}>What people are saying</div>
@@ -582,11 +677,16 @@ export default function App() {
       {!tokenError && page === "interview" && (
         <div className="page">
           <div className="page-header">
-            <h2>Mock Interview - {role}</h2>
-            <p>Question {questionNum} of {TOTAL_QUESTIONS}</p>
+            <h2>Mock Interview — {role}</h2>
+            <p>Question {questionNum} of {isFree ? FREE_QUESTIONS : TOTAL_QUESTIONS}{isFree ? " · Free Preview" : ""}</p>
           </div>
+          {isFree && (
+            <div className="free-banner">
+              🎯 Free preview · {FREE_QUESTIONS - questionNum + 1} question{FREE_QUESTIONS - questionNum + 1 !== 1 ? "s" : ""} remaining · Unlock all 15 + report for Rs.299
+            </div>
+          )}
           <div className="progress-bar">
-            <div className="progress-fill" style={{ width: `${(questionNum / TOTAL_QUESTIONS) * 100}%` }} />
+            <div className="progress-fill" style={{ width: `${(questionNum / (isFree ? FREE_QUESTIONS : TOTAL_QUESTIONS)) * 100}%` }} />
           </div>
           {loading ? (
             <div className="loading">
@@ -621,12 +721,48 @@ export default function App() {
                     <p>{feedback}</p>
                   </div>
                   <button className="btn-next" onClick={nextQuestion}>
-                    {questionNum >= TOTAL_QUESTIONS ? "See Final Report" : "Next Question"}
+                    {isFree && questionNum >= FREE_QUESTIONS ? "See Upgrade Options →" : !isFree && questionNum >= TOTAL_QUESTIONS ? "See Final Report" : "Next Question →"}
                   </button>
                 </>
               )}
             </>
           )}
+        </div>
+      )}
+
+      {!tokenError && page === "upsell" && (
+        <div className="upsell-page">
+          <div className="upsell-card">
+            <div className="upsell-badge">✓ Free preview complete</div>
+            <h2>You've seen what it can do.<br />Now <span>go all in.</span></h2>
+            <p>You just did 3 questions. Real interviews have 10–15. Get the full session + a detailed performance report to know exactly where you stand.</p>
+            <div className="upsell-features">
+              <div className="upsell-feature">
+                <div className="upsell-feature-icon">🎯</div>
+                <span>12 more role-specific questions (15 total)</span>
+              </div>
+              <div className="upsell-feature">
+                <div className="upsell-feature-icon">⚡</div>
+                <span>Instant AI feedback on every single answer</span>
+              </div>
+              <div className="upsell-feature">
+                <div className="upsell-feature-icon">📊</div>
+                <span>Final performance report with score + 1-week plan</span>
+              </div>
+              <div className="upsell-feature">
+                <div className="upsell-feature-icon">📧</div>
+                <span>Instant email delivery — start in 60 seconds</span>
+              </div>
+            </div>
+            <div className="upsell-price">
+              <span className="upsell-price-num">Rs.299</span>
+              <span className="upsell-price-orig">Rs.999</span>
+            </div>
+            <button className="btn-cta" style={{width:"100%", justifyContent:"center"}} onClick={handleBuyClick}>
+              Get Full Access — Rs.299
+            </button>
+            <div className="upsell-guarantee">Secure payment · Instant email · One-time payment</div>
+          </div>
         </div>
       )}
 
