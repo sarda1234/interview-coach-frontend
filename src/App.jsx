@@ -405,6 +405,17 @@ export default function App() {
   const [isFree, setIsFree] = useState(false);
 
   useEffect(() => {
+    // Meta Pixel Init
+    (function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js'));
+    window.fbq('init', '2178785699602316');
+    window.fbq('track', 'PageView');
     const token = getTokenFromURL();
     if (token) checkToken();
   }, []);
@@ -421,11 +432,13 @@ export default function App() {
 
   function handleBuyClick() {
     fetch(`${API}/api/track-click`, { method: "POST" }).catch(() => {});
+    if (window.fbq) window.fbq('track', 'InitiateCheckout', { currency: 'INR', value: 299 });
     window.open("https://superprofile.bio/vp/interview-coach", "_blank");
   }
 
   function handleFreeClick() {
     fetch(`${API}/api/track-free-trial`, { method: "POST" }).catch(() => {});
+    if (window.fbq) window.fbq('trackCustom', 'StartFreeTrial');
     setIsFree(true);
     setPage("role");
   }
