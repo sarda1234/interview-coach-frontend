@@ -13,7 +13,7 @@ const styles = `
   .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 100px; margin-bottom: 28px; letter-spacing: 0.04em; text-transform: uppercase; }
   .badge-dot { width: 6px; height: 6px; background: #f59e0b; border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(36px, 7vw, 64px); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: #f0ede8; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 6vw, 64px); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: #f0ede8; margin-bottom: 20px; }
   .hero h1 span { color: #f59e0b; }
   .hero p { font-size: 18px; color: #9a9690; line-height: 1.6; max-width: 520px; margin: 0 auto 36px; font-weight: 300; }
   .cta-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -544,20 +544,7 @@ export default function App() {
             </div>
             <h1>Ace Your Next<br /><span>Job Interview</span></h1>
             <p>Practice with an AI interviewer that asks real questions, judges your answers, and tells you exactly what to improve.</p>
-            <div className="cta-group">
-              <button className="btn-cta" onClick={handleFreeClick}>
-                🎯 Try Free — 3 Questions, No Sign Up
-              </button>
-              <div className="cta-sub">
-                <span>No payment needed</span>
-                <span>Any role</span>
-                <span>Instant start</span>
-              </div>
-              <button style={{background:"transparent", border:"1px solid rgba(245,158,11,0.3)", color:"#f59e0b", fontFamily:"'DM Sans', sans-serif", fontSize:"14px", padding:"10px 24px", borderRadius:"100px", cursor:"pointer", marginTop:"4px"}} onClick={handleBuyClick}>
-                Already convinced? Full access — Rs.299 →
-              </button>
-            </div>
-            <div className="social-proof">
+            <div className="social-proof" style={{marginTop:"0", marginBottom:"24px"}}>
               <div className="avatars">
                 <div className="avatar av1">AK</div>
                 <div className="avatar av2">SR</div>
@@ -567,6 +554,19 @@ export default function App() {
               <div className="social-proof-text">
                 <strong>200+ professionals</strong> have used this to land their dream jobs
               </div>
+            </div>
+            <div className="cta-group">
+              <button className="btn-cta" style={{width:"100%", justifyContent:"center", fontSize:"18px", padding:"18px 24px"}} onClick={handleFreeClick}>
+                🎯 Try Free — No Sign Up
+              </button>
+              <div className="cta-sub">
+                <span>No payment needed</span>
+                <span>Any role</span>
+                <span>Instant start</span>
+              </div>
+              <button style={{background:"transparent", border:"1px solid rgba(245,158,11,0.3)", color:"#f59e0b", fontFamily:"'DM Sans', sans-serif", fontSize:"14px", padding:"10px 24px", borderRadius:"100px", cursor:"pointer", marginTop:"4px", width:"100%"}} onClick={handleBuyClick}>
+                Already convinced? Full access — Rs.299 →
+              </button>
             </div>
           </div>
 
