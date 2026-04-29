@@ -9,11 +9,11 @@ const styles = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: #0a0a0a; color: #f0ede8; min-height: 100vh; }
   .landing { min-height: 100vh; background: #0a0a0a; overflow: hidden; }
-  .hero { position: relative; padding: 80px 24px 60px; text-align: center; max-width: 720px; margin: 0 auto; }
+  .hero { position: relative; padding: 48px 24px 40px; text-align: center; max-width: 720px; margin: 0 auto; }
   .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 100px; margin-bottom: 28px; letter-spacing: 0.04em; text-transform: uppercase; }
   .badge-dot { width: 6px; height: 6px; background: #f59e0b; border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 6vw, 64px); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: #f0ede8; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 52px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: #f0ede8; margin-bottom: 20px; }
   .hero h1 span { color: #f59e0b; }
   .hero p { font-size: 18px; color: #9a9690; line-height: 1.6; max-width: 520px; margin: 0 auto 36px; font-weight: 300; }
   .cta-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -542,8 +542,8 @@ export default function App() {
               <div className="badge-dot" />
               Try free — no sign up needed
             </div>
-            <h1>Ace Your Next<br /><span>Job Interview</span></h1>
-            <p>Practice with an AI interviewer that asks real questions, judges your answers, and tells you exactly what to improve.</p>
+            <h1>Ace Your Next <span>Job Interview</span></h1>
+            <p>AI mock interviews with instant feedback. Know exactly what to improve before the real thing.</p>
             <div className="social-proof" style={{marginTop:"0", marginBottom:"24px"}}>
               <div className="avatars">
                 <div className="avatar av1">AK</div>
