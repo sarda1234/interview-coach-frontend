@@ -544,6 +544,7 @@ export default function App() {
             </div>
             <h1>Ace Your Next <span>Job Interview</span></h1>
             <p>AI mock interviews with instant feedback. Know exactly what to improve before the real thing.</p>
+            <p style={{fontSize:"15px", color:"#f59e0b", marginTop:"-20px", marginBottom:"0", fontWeight:"400", opacity:0.85}}>🎯 Interview ki taiyari karo — AI ke saath</p>
             <div className="social-proof" style={{marginTop:"0", marginBottom:"24px"}}>
               <div className="avatars">
                 <div className="avatar av1">AK</div>
